@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CESA — Computer Engineering Students Association</title>
+<style>
+/* ================== RESET & THEME ================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,'Noto Sans',sans-serif;overflow-x:hidden;}
+:root{
+  --bg:#0b1020; --surface:#111833; --surface-2:#0e1430;
+  --text:#e7ecff; --muted:#9aa8cb; --brand:#6c9cff; --brand-2:#7bf1a8;
+  --shadow:0 10px 30px rgba(0,0,0,.25); --radius-xl:18px; --radius-lg:14px; --radius-md:12px; --radius-sm:10px;
+  --grad: radial-gradient(1200px 600px at 80% -20%, rgba(108,156,255,.22), transparent 60%),
+         radial-gradient(800px 400px at -10% 40%, rgba(123,241,168,.12), transparent 60%),
+         linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+}
+[data-theme="light"]{
+  --bg:#f7f9ff; --surface:#ffffff; --surface-2:#f1f5ff; --text:#0f1733; --muted:#516089; --brand:#3b82f6; --brand-2:#16a34a;
+  --shadow:0 8px 22px rgba(16,24,40,.08);
+}
+body{background:var(--bg);color:var(--text);line-height:1.6;display:grid;place-items:center;min-height:100vh;}
+
+/* ================== CONTAINER ================== */
+.container{max-width:1200px;margin-inline:auto;padding:2rem;position:relative;z-index:2;}
+
+/* ================== 3D BACKGROUND ================== */
+.scene{position:absolute;inset:0;perspective:1200px;overflow:hidden;z-index:0;}
+.cube{
+  position:absolute;top:50%;left:50%;
+  width:200px;height:200px;
+  transform-style:preserve-3d;
+  animation:rotateCube 15s linear infinite;
+}
+.face{
+  position:absolute;width:200px;height:200px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:var(--shadow);
+}
+.face.front{transform:rotateY(0deg) translateZ(100px);}
+.face.back{transform:rotateY(180deg) translateZ(100px);}
+.face.right{transform:rotateY(90deg) translateZ(100px);}
+.face.left{transform:rotateY(-90deg) translateZ(100px);}
+.face.top{transform:rotateX(90deg) translateZ(100px);}
+.face.bottom{transform:rotateX(-90deg) translateZ(100px);}
+@keyframes rotateCube{0%{transform:rotateX(0deg) rotateY(0deg);}100%{transform:rotateX(360deg) rotateY(360deg);}}
+
+/* Floating particles */
+.particle{
+  position:absolute;width:6px;height:6px;background:var(--brand);border-radius:50%;
+  opacity:0.6;
+  animation:floatParticle linear infinite;
+}
+@keyframes floatParticle{
+  0%{transform:translate3d(0,0,0);}
+  50%{transform:translate3d(50px,-30px,20px);}
+  100%{transform:translate3d(0,0,0);}
+}
+
+/* ================== HERO ================== */
+.hero{position:relative;z-index:1;text-align:left;display:grid;place-items:center;padding:4rem 2rem;}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;}
+.hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.1;}
+.hero p{color:var(--muted);margin-top:.5rem;font-size:clamp(1rem,2.5vw,1.25rem);}
+.cta{display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;}
+.btn{padding:0.75rem 1.5rem;border-radius:12px;border:none;font-weight:700;cursor:pointer;transition:0.3s;}
+.btn-primary{background:var(--brand);color:#fff;box-shadow:var(--shadow);}
+.btn-primary:hover{transform:translateY(-3px);}
+.btn-secondary{background:transparent;border:2px solid var(--brand);color:var(--brand);}
+.btn-secondary:hover{transform:translateY(-3px);background:var(--brand);color:#fff;}
+
+/* Hero card */
+.hero-card{background:var(--surface);border-radius:var(--radius-xl);padding:2rem;box-shadow:var(--shadow);}
+.hero-badge{display:inline-block;padding:0.5rem 1rem;border-radius:999px;background:var(--brand-2);font-weight:700;}
+
+/* ================== RESPONSIVE ================== */
+@media(max-width:860px){.hero-inner{grid-template-columns:1fr;gap:1.5rem;}}
+</style>
+</head>
+<body>
+
+<!-- 3D Background -->
+<div class="scene">
+  <div class="cube" style="top:30%;left:30%">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face left"></div>
+    <div class="face right"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+  <div class="cube" style="top:70%;left:70%;width:150px;height:150px;animation-duration:20s;">
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face left"></div>
+    <div class="face right"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+  </div>
+  <!-- Floating particles -->
+  <div class="particle" style="top:10%;left:15%;animation-duration:8s;"></div>
+  <div class="particle" style="top:60%;left:25%;animation-duration:12s;"></div>
+  <div class="particle" style="top:40%;left:80%;animation-duration:10s;"></div>
+</div>
+
+<!-- Hero Content -->
+<div class="container hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-badge">💡 Innovate • Build • Impact</span>
+      <h1>Building a stronger tech culture on campus with events, projects, and mentorship.</h1>
+      <p>Join CESA to access hands-on workshops, hackathons, mentorship from alumni, and real-world project teams. Learn by doing, ship to production, and showcase your work.</p>
+      <div class="cta">
+        <button class="btn btn-primary">View Upcoming Events</button>
+        <button class="btn btn-secondary">Explore Projects</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <p><strong>Featured:</strong> "24-Hour Campus Hack" • 27–28 Sep — Registrations open</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
